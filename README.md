@@ -42,20 +42,29 @@
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
-    }
-
-    input {
-      width: 100%;
+      color: white;
     }
 
     h3 {
       color: #fff;
       margin-top: 20px;
     }
+
+    /* Caixinhas pequenas lado a lado */
+    .pesos {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pesos input {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>TREINO SEMANAL <br>(Grazielle Lima Frango💩)</h1>
+  <h1>TREINO SEMANAL <br>(Grazelda)</h1>
 
   <label for="dia">Selecione o dia:</label>
   <select id="dia" onchange="carregarTreino()">
@@ -70,7 +79,7 @@
 
   <div id="treino" class="treino"></div>
 
-  <script>
+<script>
     // Treinos organizados por categorias
     const treinos = {
       segunda: {
@@ -88,7 +97,7 @@
       },
       quinta: {
         costas: ["Puxada Alta", "Remada Baixa", "Pulldown"],
-        biceps: ["Bíceps Na Polia", "Bíceps Scott"],
+ biceps: ["Bíceps Na Polia", "Bíceps Scott"],
       },
       sexta: {
         pernas: ["Stiff", "Mesa Flexora", "Coice Na Polia", "Cadeira Abdutora", "Elevação Pélvica", "Panturrilha Em Pé"],
@@ -99,8 +108,8 @@
       },
       domingo: {
         descanso: ["Descanso"]
-      }
-    };
+      }
+    };
 
     // Função para carregar o treino do dia
     function carregarTreino() {
@@ -119,21 +128,30 @@
         treinoDiv.innerHTML += `<h3>${categoria.toUpperCase()}</h3>`;
         
         treinos[dia][categoria].forEach(exercicio => {
-          const pesosSalvos = localStorage.getItem(`${dia}-${exercicio}`) || "";
           treinoDiv.innerHTML += `
             <div class="exercicio">
               <label>${exercicio}</label>
-              <input type="text" placeholder="PESO" value="${pesosSalvos}" 
-                onchange="salvarPeso('${dia}', '${exercicio}', this.value)">
+              <div class="pesos">
+                ${[1,2,3,4].map(i => {
+                  const pesoSalvo = localStorage.getItem(`${dia}-${exercicio}-rep${i}`) || "";
+                  return `<input type="text" value="${pesoSalvo}" onkeydown="formatarPeso(event, '${dia}', '${exercicio}', ${i}, this)">`;
+                }).join("")}
+              </div>
             </div>
           `;
         });
       }
     }
 
-    // Função para salvar os pesos no navegador
-    function salvarPeso(dia, exercicio, pesos) {
-      localStorage.setItem(`${dia}-${exercicio}`, pesos);
+    // Função para formatar e salvar o peso
+    function formatarPeso(event, dia, exercicio, rep, input) {
+      if (event.key === "Enter") {
+        let valor = input.value.replace("kg", "").trim();
+        if (valor && !isNaN(valor)) {
+          input.value = valor + " kg";
+          localStorage.setItem(`${dia}-${exercicio}-rep${rep}`, input.value);
+        }
+      }
     }
 
     // Carrega o treino do dia inicial
