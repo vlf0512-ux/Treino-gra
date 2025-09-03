@@ -5,7 +5,7 @@
   <title>Meu Treino</title>
   <link rel="stylesheet" href="style.css">
 
-   <!-- Fonte do Google -->
+  <!-- Fonte do Google -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -47,10 +47,15 @@
     input {
       width: 100%;
     }
+
+    h3 {
+      color: #fff;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <h1>TREINO SEMANAL <br>(Grazielle Lima Frango)</h1>
+  <h1>TREINO SEMANAL <br>(Grazielle Lima Frango💩)</h1>
 
   <label for="dia">Selecione o dia:</label>
   <select id="dia" onchange="carregarTreino()">
@@ -66,48 +71,73 @@
   <div id="treino" class="treino"></div>
 
   <script>
-    // Treinos do Mestre
+    // Treinos organizados por categorias
     const treinos = {
-      segunda: ["Supino Reto", "Cruxifixo", "Tríceps Na Polia", "Francês No Halter", "Desenvolvimento"],
-      terca: ["Agachamento No Smith", "Leg Press","Cadeira Extensora", "Panturrilha Sentado","Abdôminal"],
-      quarta: ["Cardio"],
-      quinta: ["Puxada Alta","Remanda Baixa","Pulldown","Bíceps Na Polia","Bíceps Scott"],
-      sexta: ["Stiff", "Mesa Flexora", "Coice Na Polia", "Cadeira Abdutora", "Elevação Pélvica", "Panturrilha Em Pé","Abdômen"],
-      sabado: ["Descanso"],
-      domingo: ["Descanso"]
-      
+      segunda: {
+        peito: ["Supino Reto", "Cruxifixo",],
+        ombro: ["Desenvolvimento"],
+        triceps: ["Tríceps Na Polia", "Francês No Halter"],
+        
+      },
+      terca: {
+        quadriceps: ["Agachamento No Smith", "Leg Press", "Cadeira Extensora", "Panturrilha Sentado"],
+        abdominal: ["Abdômen"],
+      },
+      quarta: {
+        cardio: ["Cardio"]
+      },
+      quinta: {
+        costas: ["Puxada Alta", "Remada Baixa", "Pulldown"],
+        biceps: ["Bíceps Na Polia", "Bíceps Scott"],
+      },
+      sexta: {
+        pernas: ["Stiff", "Mesa Flexora", "Coice Na Polia", "Cadeira Abdutora", "Elevação Pélvica", "Panturrilha Em Pé"],
+        abdominal: ["Abdômen"],
+      },
+      sabado: {
+        descanso: ["Descanso"]
+      },
+      domingo: {
+        descanso: ["Descanso"]
+      }
     };
 
-    // Carregar treino
+    // Função para carregar o treino do dia
     function carregarTreino() {
       const dia = document.getElementById("dia").value;
       const treinoDiv = document.getElementById("treino");
       treinoDiv.innerHTML = "";
 
-      if (treinos[dia].length === 1 && treinos[dia][0].toLowerCase() === "descanso") {
+      // Verifica se o dia é de descanso
+      if (treinos[dia].descanso) {
         treinoDiv.innerHTML = "<h3>Dia de descanso 😴</h3>";
         return;
       }
 
-      treinos[dia].forEach(exercicio => {
-        const pesosSalvos = localStorage.getItem(`${dia}-${exercicio}`) || "";
-        treinoDiv.innerHTML += `
-          <div class="exercicio">
-            <label>${exercicio}</label>
-            <input type="text" placeholder="PESO" value="${pesosSalvos}"
-              onchange="salvarPeso('${dia}','${exercicio}', this.value)">
-          </div>
-        `;
-      });
+      // Para cada categoria de treino do dia
+      for (const categoria in treinos[dia]) {
+        treinoDiv.innerHTML += `<h3>${categoria.toUpperCase()}</h3>`;
+        
+        treinos[dia][categoria].forEach(exercicio => {
+          const pesosSalvos = localStorage.getItem(`${dia}-${exercicio}`) || "";
+          treinoDiv.innerHTML += `
+            <div class="exercicio">
+              <label>${exercicio}</label>
+              <input type="text" placeholder="PESO" value="${pesosSalvos}" 
+                onchange="salvarPeso('${dia}', '${exercicio}', this.value)">
+            </div>
+          `;
+        });
+      }
     }
 
-    // Salvar pesos no navegador
+    // Função para salvar os pesos no navegador
     function salvarPeso(dia, exercicio, pesos) {
       localStorage.setItem(`${dia}-${exercicio}`, pesos);
     }
 
-    // Carrega treino do dia inicial
+    // Carrega o treino do dia inicial
     window.onload = carregarTreino;
-     </script>
+  </script>
 </body>
 </html>
