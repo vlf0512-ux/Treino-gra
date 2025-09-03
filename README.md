@@ -50,7 +50,7 @@
   </style>
 </head>
 <body>
-  <h1>TREINO SEMANAL <br>(Grazielle Lima Frango💩)</h1>
+  <h1>TREINO SEMANAL <br>(Grazielle Lima Frango)</h1>
 
   <label for="dia">Selecione o dia:</label>
   <select id="dia" onchange="carregarTreino()">
