@@ -1,23 +1,50 @@
+
+/* BODY - fundo degradê */
 body {
   font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  color: #f0f0f0;
+  min-height: 100vh; /* ocupa toda a tela */
+  margin: 0;
+
+  background: linear-gradient(135deg, #4b4858 0%, #2e2c38 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
-body {
-  background: linear-gradient(135deg, #4a4e55, #f8f9fc);
-  color: #474e48;
-}
+
+/* CONTAINER TREINO */
 .treino {
-  background: rgba(250, 249, 252, 0.95);
+  background: rgba(250, 249, 252, 0.85); /* leve transparência para ver degradê atrás */
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
   box-shadow: 0 6px 15px rgba(233, 231, 231, 0.2);
 }
+
+/* EXERCICIOS */
+.exercicio {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(97, 95, 95, 0.7); /* levemente transparente */
+  border-radius: 8px;
+}
+
+/* LABELS */
+label {
+  color: #edeff3;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* INPUTS */
 input {
   width: 100%;
   padding: 10px;
-  border: 2px solid #f1f3f7;
+  border: 2px solid #f9fafc;
   border-radius: 8px;
   outline: none;
+  background-color: #5c5959;
+  color: #fff;
   transition: 0.3s;
 }
 
@@ -25,58 +52,50 @@ input:focus {
   border-color: #fcfcfd;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
-select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #2a5298;
-  background: rgb(56, 53, 53);
-  font-weight: bold;
+
+/* FEEDBACK VISUAL - ao salvar */
+input.salvo {
+  border: 2px solid #4caf50 !important;
+  background: #e8f5e9;
+  color: #000;
 }
+
+/* PLACEHOLDER */
+input::placeholder {
+  color: #eeeeee;
+  font-style: italic;
+}
+
+/* SELECT */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #222;
+  color: #fff;
+  padding: 10px 30px 10px 10px;
+  border: 2px solid #f1f2f5;
+  border-radius: 8px;
+  font-weight: bold;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* TITULO */
 h1 {
   text-align: center;
   color: #fdfeff;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
 }
-input::placeholder {
-  color: #eeeeee; /* cinza mais escuro */
-  font-style: italic; /* deixa em itálico se quiser */
-}
-label {
-  color: #edeff3; /* azul */
-  font-weight: bold;
-  font-size: 18px;
-}
-.exercicio {
-  margin-bottom: 15px;
-  padding: 8px;
-  background-color: #615f5f;
-  border-radius: 6px;
-}
-input {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #f9fafc;
-  border-radius: 8px;
-  outline: none;
-  background-color: #5c5959;  /* aqui você muda a cor do fundo */
-}
-select {
-  appearance: none;      /* remove a seta padrão (funciona na maioria) */
-  -webkit-appearance: none; /* Chrome/Safari */
-  -moz-appearance: none;    /* Firefox */
-  
-  background-color: #222;  /* fundo */
-  color: #fff;             /* cor do texto */
-  padding: 10px;
-  border: 2px solid #f1f2f5;
-  border-radius: 8px;
-  
-  /* adiciona espaço pro ícone */
-  padding-right: 30px;
-  
-  /* seta customizada (emoji ou SVG) */
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  .exercicio, .treino {
+    padding: 15px;
+  }
+  input {
+    width: 100%;
+  }
 }
