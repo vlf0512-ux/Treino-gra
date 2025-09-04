@@ -9,21 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #4b4858;
-      padding: 20px;
-      color: #333;
-    }
-
+    
     h1 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
-    select, input, button {
+    select, input {
       margin: 5px 0;
       padding: 10px;
       font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #666;
     }
 
     .treino {
@@ -31,7 +28,7 @@
       padding: 20px;
       border-radius: 10px;
       margin-top: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
 
     .exercicio {
@@ -42,11 +39,11 @@
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
-      color: white;
+      color: #fff;
     }
 
     h3 {
-      color: #fff;
+      color: #ffeb3b;
       margin-top: 20px;
     }
 
@@ -57,9 +54,26 @@
     }
 
     .pesos input {
-      width: 60px;
+      width: 70px;
       padding: 5px;
       text-align: center;
+    }
+
+    /* Feedback visual quando salva */
+    .salvo {
+      border: 2px solid #4caf50 !important;
+      background: #e8f5e9;
+      color: #000;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .pesos {
+        flex-direction: column;
+      }
+      .pesos input {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -80,53 +94,29 @@
   <div id="treino" class="treino"></div>
 
 <script>
-    // Treinos organizados por categorias
     const treinos = {
-      segunda: {
-        peito: ["Supino Reto", "Cruxifixo",],
-        ombro: ["Desenvolvimento"],
-        triceps: ["Tríceps Na Polia", "Francês No Halter"],
-        
-      },
-      terca: {
-        quadriceps: ["Agachamento No Smith", "Leg Press", "Cadeira Extensora", "Panturrilha Sentado"],
-        abdominal: ["Abdômen"],
-      },
-      quarta: {
-        cardio: ["Cardio"]
-      },
-      quinta: {
-        costas: ["Puxada Alta", "Remada Baixa", "Pulldown"],
- biceps: ["Bíceps Na Polia", "Bíceps Scott"],
-      },
-      sexta: {
-        pernas: ["Stiff", "Mesa Flexora", "Coice Na Polia", "Cadeira Abdutora", "Elevação Pélvica", "Panturrilha Em Pé"],
-        abdominal: ["Abdômen"],
-      },
-      sabado: {
-        descanso: ["Descanso"]
-      },
-      domingo: {
-        descanso: ["Descanso"]
-      }
-    };
+      segunda: { peito: ["Supino Reto", "Cruxifixo"], ombro: ["Desenvolvimento"], triceps: ["Tríceps Na Polia", "Francês No Halter"] },
+      terca: { quadriceps: ["Agachamento No Smith", "Leg Press", "Cadeira Extensora", "Panturrilha Sentado"], abdominal: ["Abdômen"] },
+      quarta: { cardio: ["Cardio"] },
+      quinta: { costas: ["Puxada Alta", "Remada Baixa", "Pulldown"], biceps: ["Bíceps Na Polia", "Bíceps Scott"] },
+      sexta: { pernas: ["Stiff", "Mesa Flexora", "Coice Na Polia", "Cadeira Abdutora", "Elevação Pélvica", "Panturrilha Em Pé"], abdominal: ["Abdômen"] },
+      sabado: { descanso: ["Descanso"] },
+      domingo: { descanso: ["Descanso"] }
+    };
 
-    // Função para carregar o treino do dia
     function carregarTreino() {
       const dia = document.getElementById("dia").value;
       const treinoDiv = document.getElementById("treino");
       treinoDiv.innerHTML = "";
 
-      // Verifica se o dia é de descanso
       if (treinos[dia].descanso) {
         treinoDiv.innerHTML = "<h3>Dia de descanso 😴</h3>";
         return;
       }
 
-      // Para cada categoria de treino do dia
       for (const categoria in treinos[dia]) {
         treinoDiv.innerHTML += `<h3>${categoria.toUpperCase()}</h3>`;
-        
+
         treinos[dia][categoria].forEach(exercicio => {
           treinoDiv.innerHTML += `
             <div class="exercicio">
@@ -143,25 +133,27 @@
       }
     }
 
-    // Função para formatar e salvar o peso + ir para a próxima caixinha
-function formatarPeso(event, dia, exercicio, rep, input) {
-  if (event.key === "Enter") {
-    let valor = input.value.replace("kg", "").trim();
-    if (valor && !isNaN(valor)) {
-      input.value = valor + " kg";
-      localStorage.setItem(`${dia}-${exercicio}-rep${rep}`, input.value);
+    function formatarPeso(event, dia, exercicio, rep, input) {
+      if (event.key === "Enter") {
+        let valor = input.value.replace("kg", "").trim();
+        if (valor && !isNaN(valor)) {
+          input.value = valor + " kg";
+          localStorage.setItem(`${dia}-${exercicio}-rep${rep}`, input.value);
 
-      // Pega a próxima caixinha dentro do mesmo exercício
-      const proximo = input.parentElement.querySelectorAll("input")[rep]; 
-      if (proximo) {
-        proximo.focus(); // move o cursor para a próxima
+          // Feedback visual
+          input.classList.add("salvo");
+          setTimeout(() => input.classList.remove("salvo"), 600);
+
+          // Próximo input
+          const proximo = input.parentElement.querySelectorAll("input")[rep];
+          if (proximo) proximo.focus();
+        }
+        event.preventDefault();
       }
     }
-    event.preventDefault(); // evita pular linha
-  }
-}
-    // Carrega o treino do dia inicial
+
     window.onload = carregarTreino;
-  </script>
+</script>
 </body>
 </html>
+
