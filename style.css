@@ -1,4 +1,3 @@
-
 /* BODY - fundo degradê */
 body {
   font-family: 'Poppins', sans-serif;
@@ -98,4 +97,37 @@ h1 {
   input {
     width: 100%;
   }
+}
+
+button#btnduvidas {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2e86de;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button#btnduvidas:hover {
+  background-color: #59ff30;
+}
+button {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #3c3c4d;
+  color: #baff3b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #57576d;
+  color: #fff176;
 }
