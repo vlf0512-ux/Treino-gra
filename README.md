@@ -90,6 +90,7 @@
     <option value="sabado">Sábado</option>
     <option value="domingo">Domingo</option>
   </select>
+  <button id="btnduvidas">duvidas</button>
 
   <div id="treino" class="treino"></div>
 
@@ -153,6 +154,10 @@
     }
 
     window.onload = carregarTreino;
+
+    document.getElementById("btnduvidas").onclick = function() {
+  window.open("duvidas.html", "_blank"); // abre a página de dúvidas
+};
 </script>
 </body>
 </html>
