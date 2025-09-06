@@ -1,0 +1,133 @@
+/* BODY - fundo degradê */
+body {
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  color: #f0f0f0;
+  min-height: 100vh; /* ocupa toda a tela */
+  margin: 0;
+
+  background: linear-gradient(135deg, #4b4858 0%, #2e2c38 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* CONTAINER TREINO */
+.treino {
+  background: rgba(250, 249, 252, 0.85); /* leve transparência para ver degradê atrás */
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 6px 15px rgba(233, 231, 231, 0.2);
+}
+
+/* EXERCICIOS */
+.exercicio {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(97, 95, 95, 0.7); /* levemente transparente */
+  border-radius: 8px;
+}
+
+/* LABELS */
+label {
+  color: #edeff3;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #f9fafc;
+  border-radius: 8px;
+  outline: none;
+  background-color: #5c5959;
+  color: #fff;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #fcfcfd;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* FEEDBACK VISUAL - ao salvar */
+input.salvo {
+  border: 2px solid #4caf50 !important;
+  background: #e8f5e9;
+  color: #000;
+}
+
+/* PLACEHOLDER */
+input::placeholder {
+  color: #eeeeee;
+  font-style: italic;
+}
+
+/* SELECT */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #222;
+  color: #fff;
+  padding: 10px 30px 10px 10px;
+  border: 2px solid #f1f2f5;
+  border-radius: 8px;
+  font-weight: bold;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* TITULO */
+h1 {
+  text-align: center;
+  color: #fdfeff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  .exercicio, .treino {
+    padding: 15px;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+button#btnduvidas {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2e86de;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button#btnduvidas:hover {
+  background-color: #59ff30;
+}
+button {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #3c3c4d;
+  color: #baff3b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #57576d;
+  color: #fff176;
+}
