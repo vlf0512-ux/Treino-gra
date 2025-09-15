@@ -96,7 +96,7 @@
 
 <script>
     const treinos = {
-      segunda: { peito: ["Supino Reto", "Cruxifixo"], ombro: ["Desenvolvimento"], triceps: ["Tríceps Na Polia", "Francês No Halter"] },
+      segunda: { peito: ["Supino Reto", "Cruxifixo"], ombro: ["Desenvolvimento", "Remada Alta Na Polia Baixa"], triceps: ["Tríceps Na Polia", "Francês No Halter"] },
       terca: { quadriceps: ["Agachamento No Smith", "Leg Press", "Cadeira Extensora", "Panturrilha Sentado"], abdominal: ["Abdômen"] },
       quarta: { cardio: ["Cardio"] },
       quinta: { costas: ["Puxada Alta", "Remada Baixa", "Pulldown"], biceps: ["Bíceps Na Polia", "Bíceps Scott"] },
